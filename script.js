@@ -1,11 +1,14 @@
-
+const clearBtn = document.getElementById('clearButton');
 const gridDiv = document.getElementById('grid');
 let down = false;
+
+
 
 function makeGrid(size){
     gridDiv.style.gridTemplateColumns = `repeat(${size},1fr)`;
     gridDiv.style.gridTemplateRows = `repeat(${size},1fr)`;
     // gridDiv.style.backgroundColor = 'black';    
+    setUpGrid(size);
 }
 
 function setUpGrid(size){
@@ -26,6 +29,19 @@ function setUpGrid(size){
     }
 }
 
+function clearGrid(){
+    let currentCount = gridDiv.childElementCount;
+    let newCount = prompt('Enter Number of Grids'); 
+    newCount = newCount > 100 ? 100 : newCount;
+    for(let x = 0 ; x < currentCount; x++){
+        gridDiv.removeChild(gridDiv.firstChild);
+    }
+    makeGrid(newCount);
+}
+
+
+clearBtn.onclick = clearGrid;
+
 window.onmousedown = ()=>{
     down=true;
     console.log('down');
@@ -37,5 +53,5 @@ window.onmouseup = ()=>{
 
 window.onload = ()=>{
     makeGrid(16);
-    setUpGrid(16);
+    // setUpGrid(16);
 }
